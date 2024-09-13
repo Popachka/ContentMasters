@@ -1,0 +1,24 @@
+__pycache__
+.coverage
+htmlcov
+.cache
+venv/
+*.env
+# FastAPI
+.env
+.coverage
+htmlcov/
+.cache/
+venv/
+*.pyc
+*.pyo
+*.pyd
+
+# React
+node_modules/
+build/
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
