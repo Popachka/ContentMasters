@@ -22,8 +22,7 @@ COPY ./clear_bd.sh /app/
 COPY ./create_migrate.sh /app/  
 COPY ./migrate.sh /app/
 
-# Устанавливаем права на выполнение для скриптов
-RUN chmod +x /start-reload.sh
-
 # Загрузка данных NLTK
 RUN python -m nltk.downloader punkt
+
+CMD ["/bin/sh", "start.sh"] # Убедитесь, что ваш скрипт запуска называется корректно
