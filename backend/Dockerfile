@@ -1,16 +1,17 @@
 # Используем официальный Python образ
 FROM python:3.10-slim
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Установить зависимости
+# Копируем и устанавливаем зависимости
 COPY requirements.txt requirements.txt
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Задаем переменную окружения
 ENV PYTHONPATH=/app
 
-# Копировать исходный код и скрипты
+# Копируем исходный код и скрипты
 COPY ./app /app/app
 COPY ./prestart.sh /app/
 COPY ./alembic.ini /app/
@@ -19,8 +20,10 @@ COPY ./tests-start.sh /app/
 COPY ./start-reload.sh /
 COPY ./clear_bd.sh /app/
 COPY ./create_migrate.sh /app/  
-COPY ./migrate.sh /app/  
+COPY ./migrate.sh /app/
 
-
-# Установить права на выполнение для скриптов
+# Устанавливаем права на выполнение для скриптов
 RUN chmod +x /start-reload.sh
+
+# Загрузка данных NLTK
+RUN python -m nltk.downloader punkt

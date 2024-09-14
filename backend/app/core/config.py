@@ -4,10 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import (
     AnyUrl,
     BeforeValidator,
-    HttpUrl,
     PostgresDsn,
     computed_field,
-    model_validator,
 )
 import os
 import secrets

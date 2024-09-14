@@ -40,7 +40,6 @@ class UpdatePassword(SQLModel):
 class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
-    items: list["Item"] = Relationship(back_populates='owner')
     avatars: list["Avatar"] = Relationship(back_populates='owner')
     articles: list["Article"] = Relationship(back_populates='owner')
 
