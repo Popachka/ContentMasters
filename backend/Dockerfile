@@ -26,5 +26,4 @@ COPY ./run.sh /app/
 # Загрузка данных NLTK
 RUN python -m nltk.downloader punkt
 
-CMD ["/bin/sh", "run.sh"] # Убедитесь, что ваш скрипт запуска называется корректно
-CMD ["/bin/sh", "prestart.sh"]
+CMD ["/bin/sh", "run.sh", "prestart.sh"] # Убедитесь, что ваш скрипт запуска называется корректно
