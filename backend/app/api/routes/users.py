@@ -10,7 +10,8 @@ from app.models.user import (
     UserUpdate,
     UserUpdateMe,
     UserPublic,
-    UpdatePassword
+    UpdatePassword,
+    UsersPublic
 )
 from app.models.optional import Message
 from app import crud
@@ -37,7 +38,7 @@ def read_users(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
     statement = select(User).offset(skip).limit(limit)
     users = session.exec(statement).all()
 
-    return UserPublic(data=users, count=count)
+    return UsersPublic(data=users, count=count)
 
 
 @router.post(

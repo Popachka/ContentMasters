@@ -54,7 +54,6 @@ class YandexGPT:
         """Парсит XML ответ от Яндекса и возвращает результаты поиска."""
         logger.info("Parsing Yandex XML response.")
         root = ET.fromstring(xml_response)
-        found_results = root.find('.//found-human').text
         groups = root.findall('.//group')
 
         search_results = []
@@ -70,7 +69,6 @@ class YandexGPT:
                 })
         logger.info(f"Found {len(search_results)} search results.")
         return {
-            "found_results": found_results,
             "search_results": search_results
         }
 
