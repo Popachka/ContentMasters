@@ -41,14 +41,3 @@ services:
       - 5050:80
     depends_on:
       - db
-  frontend:
-    image: 'front'
-    restart: always
-    networks:
-      - default
-    build: 
-      context: ./frontend
-    ports:
-       - "3000:3000"  # Проброс порта из контейнера на хост
-    volumes:
-      - ./frontend:/app  # Монтирование локальной папки в контейнер
