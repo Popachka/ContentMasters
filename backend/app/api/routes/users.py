@@ -29,7 +29,7 @@ router = APIRouter()
 @router.get(
     '/',
     dependencies=[Depends(get_current_active_superuser)],
-    response_model=UserPublic
+    response_model=UsersPublic
 )
 def read_users(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
     count_statement = select(func.count()).select_from(User)

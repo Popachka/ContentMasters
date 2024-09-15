@@ -72,8 +72,10 @@ def create_avatar(*,
                   session: SessionDep, current_user: CurrentUser,
                   avatar_in: AvatarCreate
                   ) -> Any:
+    print('Создание роли')
     avatar = Avatar.model_validate(
         avatar_in, update={'owner_id': current_user.id})
+    print(f'Аватар: {avatar}')
     session.add(avatar)
     session.commit()
     session.refresh(avatar)
