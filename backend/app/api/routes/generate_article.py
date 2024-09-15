@@ -61,7 +61,7 @@ async def generate(
             created_article = create_article(
                 session=session,  # предполагается, что сессия передана в функцию
                 article_create=article_create,
-                owner_id=db_avatar.owner_id  # использую owner_id из аватара
+                owner_id=cur_user.id  # использую owner_id из аватара
             )
             # Проверьте, что все обязательные поля заполнены
             article_public = ArticlePublic.model_validate(
