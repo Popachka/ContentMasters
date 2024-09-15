@@ -12,7 +12,7 @@ venv/
 *.pyc
 *.pyo
 *.pyd
-
+versions/
 # React
 node_modules/
 build/
