@@ -39,6 +39,8 @@ def get_article_by_id(
     if not article:
         raise HTTPException(status_code=404,
                             detail='Такой статьи не существует')
+    if article.owner_id is None:
+        return article
     if not current_user.is_superuser and (article.owner_id != current_user.id):
         raise HTTPException(
             status_code=400,
