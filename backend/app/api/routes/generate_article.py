@@ -109,29 +109,33 @@ async def generate(
 
 
 
+# Определяем модель данных для входящего запроса
+class AnalyzeTextRequest(BaseModel):
+    article_text: str
+    top_n: int = 10
+
 @router.post('/analyze_text')
-def analyze_text(article_text, top_n=10):
+def analyze_text(request: AnalyzeTextRequest):
     """
     Анализирует текст: выделяет ключевые слова с помощью TF-IDF, 
     подсчитывает количество символов и слов.
     
-    :param article_text: str - текст статьи
-    :param top_n: int - количество топ ключевых слов для возврата (по умолчанию 10)
+    :param request: An instance of AnalyzeTextRequest containing the article text and top_n.
     :return: dict - словарь с ключевыми словами и статистикой
     """
     
     # Предобработка текста: удаление символов и приведение к нижнему регистру
-    clean_text = re.sub(r'\W+', ' ', article_text.lower())
+    clean_text = re.sub(r'\W+', ' ', request.article_text.lower())
     
-    # Лемматизация текста
-    lemmatized_text = lemmatize_text(clean_text)
-    
+    # Лемматизация текста (предполагается, что функция лемматизации определена)
+    lemmatized_text = lemmatize_text(clean_text)  # Замените на свою лемматизацию
+
     # 1. Подсчет количества символов и слов
-    num_characters = len(article_text)  # Количество символов в оригинальном тексте
+    num_characters = len(request.article_text)  # Количество символов в оригинальном тексте
     num_words = len(lemmatized_text.split())  # Количество слов
-    
+
     # 2. Используем TfidfVectorizer для получения весов TF-IDF для каждого слова
-    vectorizer = TfidfVectorizer(stop_words=russian_stop_words)  # Стоп-слова для русского языка
+    vectorizer = TfidfVectorizer(stop_words='russian')  # Убедитесь, что стоп-слова подходят для вашего случая
     tfidf_matrix = vectorizer.fit_transform([lemmatized_text])
     
     # Получаем слова и их веса
@@ -145,7 +149,7 @@ def analyze_text(article_text, top_n=10):
     sorted_words = sorted(word_score_pairs, key=lambda x: x[1], reverse=True)
 
     # Принудительно преобразуем top_n в целое число на случай ошибок типа
-    top_n = int(top_n)
+    top_n = min(max(int(request.top_n), 1), len(sorted_words))  # Ограничиваем top_n
 
     # 3. Вычисляем общую сумму TF-IDF
     total_tfidf = sum(score for _, score in sorted_words)
