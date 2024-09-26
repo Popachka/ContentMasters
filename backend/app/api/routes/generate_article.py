@@ -135,7 +135,7 @@ def analyze_text(request: AnalyzeTextRequest):
     num_words = len(lemmatized_text.split())  # Количество слов
 
     # 2. Используем TfidfVectorizer для получения весов TF-IDF для каждого слова
-    vectorizer = TfidfVectorizer(stop_words='russian')  # Убедитесь, что стоп-слова подходят для вашего случая
+    vectorizer = TfidfVectorizer(stop_words=russian_stop_words)  # Убедитесь, что стоп-слова подходят для вашего случая
     tfidf_matrix = vectorizer.fit_transform([lemmatized_text])
     
     # Получаем слова и их веса
