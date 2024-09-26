@@ -16,7 +16,7 @@ const HomePage = () => {
     setRefreshArticles(!refreshArticles); // Инвертируем значение, чтобы перезагрузить статьи
   };
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col  bg-gray-100">
       <Header />
 
       {/* Кнопка перехода к ролям */}

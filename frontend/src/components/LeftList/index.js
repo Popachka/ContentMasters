@@ -45,7 +45,7 @@ const LeftList = ({ refresh }) => {
       </div>
       
       <h2 className="text-lg font-semibold mb-4 text-center">Список статей</h2>
-      <div className="overflow-y-auto articles"> {/* Добавили скролл и ограничили высоту */}
+      <div className="overflow-y-auto articles"> 
         <ul className="space-y-3">
           {articles.map((article) => (
             <li key={article.id} className="p-3 bg-white rounded-lg shadow hover:bg-gray-100 transition">
