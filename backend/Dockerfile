@@ -25,9 +25,4 @@ COPY ./run.sh /app/
 
 # Устанавливаем права на выполнение скриптов
 RUN chmod +x /app/prestart.sh
-RUN chmod +x /app/run.sh
-
-# Загрузка данных NLTK
-RUN python -m nltk.downloader punkt
-
-CMD ["/bin/sh", "run.sh", "prestart.sh"] # Убедитесь, что ваш скрипт запуска называется корректно
+RUN chmod +x /app/run.sh        
