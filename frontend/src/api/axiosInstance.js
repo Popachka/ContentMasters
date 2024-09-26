@@ -3,8 +3,7 @@ import axios from 'axios';
 
 // Создайте экземпляр Axios с базовым URL
 const axiosInstance = axios.create({
-  // baseURL: 'https://spichkintut.ru/api/v1/', // Замените на URL вашего бэкенда
-  baseURL: 'https://espichkin.codecup.online/api/v1/'
+  baseURL: 'https://spichkintut.ru/api/v1/'
 });
 
 // Добавьте обработчик запроса для установки заголовков авторизации

@@ -91,8 +91,10 @@ const ArticleDetail = ({ onArticleCreated }) => {
     setIsAnalysisOpen(true); // Открываем модальное окно
 
     try {
-      const response = await axiosInstance.get(`article/analyze_text`, {
-        params: { article_text: article.content }
+      // Кодируем текст статьи для безопасной передачи в URL
+      const response = await axiosInstance.post('article/analyze_text', {
+        article_text: article.content, // Передаем текст в теле запроса
+        top_n: 10  // Если нужно, можно добавить дополнительные параметры
       });
       setAnalysisData(response.data);
     } catch (error) {
@@ -155,8 +157,8 @@ const ArticleDetail = ({ onArticleCreated }) => {
             <>
               <div className="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md border">
                 <p className="border mb-5">
-                Изначальное название статьи:
-                <h1 className="text-xl font-semibold mb-4 "> {article.name}</h1>
+                  Изначальное название статьи:
+                  <h1 className="text-xl font-semibold mb-4 "> {article.name}</h1>
                 </p>
                 <div className="prose lg:prose-xl">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -210,7 +212,7 @@ const ArticleDetail = ({ onArticleCreated }) => {
                   <p>Идет анализ текста...</p>
                 ) : analysisData ? (
                   <div>
-                    <h3 className="text-xl font-semibold">Ключевые слова 
+                    <h3 className="text-xl font-semibold">Ключевые слова
                       <br></br>(не учитываем похожие слова, по словообразованию)</h3>
                     <ul>
                       {analysisData.keywords.map((keyword, index) => (

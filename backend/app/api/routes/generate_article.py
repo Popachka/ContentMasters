@@ -109,7 +109,7 @@ async def generate(
 
 
 
-@router.get('/analyze_text')
+@router.post('/analyze_text')
 def analyze_text(article_text, top_n=10):
     """
     Анализирует текст: выделяет ключевые слова с помощью TF-IDF, 
