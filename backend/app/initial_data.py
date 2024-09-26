@@ -3,10 +3,6 @@ import logging
 from sqlmodel import Session
 
 from app.core.db import engine, init_db
-import nltk
-nltk.download('punkt')
-nltk.download('punkt_tab')
-# nltk.download('stopwords')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

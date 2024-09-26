@@ -2,12 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.api.deps import (
     SessionDep,
     CurrentUser,
-    get_current_active_superuser
 )
 from app.models.optional import Message
 from typing import Any
 from sqlmodel import func, select
-from app.models.article import Article, ArticleCreate, ArticleUpdate, ArticlePublic, ArticlesPublic
+from app.models.article import Article, ArticleUpdate, ArticlePublic, ArticlesPublic
 router = APIRouter()
 
 
