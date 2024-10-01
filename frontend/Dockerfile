@@ -1,23 +1,26 @@
-# Используйте официальный образ Node.js как базовый
-FROM node:18
+# Используйте официальный образ Node.js в качестве базового
+FROM node:18 AS build
 
-# Установите рабочую директорию
+# Установите рабочий каталог
 WORKDIR /app
 
-# Копируйте package.json и package-lock.json
+# Скопируйте файлы package.json и package-lock.json
 COPY package*.json ./
 
 # Установите зависимости
 RUN npm install
 
-# Копируйте все файлы в контейнер
+# Скопируйте все остальные файлы приложения
 COPY . .
 
-# Соберите приложение
+# Соберите ваше приложение
 RUN npm run build
 
-# Определите порт, который будет использоваться
-EXPOSE 3000
+# Используйте Nginx для обслуживания собранных файлов
+FROM nginx:alpine
 
-# Запустите приложение
-CMD ["npm", "start"]
+# Копируйте собранные файлы из предыдущего этапа
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Копируйте вашу конфигурацию Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
