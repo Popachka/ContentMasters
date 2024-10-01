@@ -21,6 +21,3 @@ FROM nginx:alpine
 
 # Копируйте собранные файлы из предыдущего этапа
 COPY --from=build /app/build /usr/share/nginx/html
-
-# Копируйте вашу конфигурацию Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
