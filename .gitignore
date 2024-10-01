@@ -17,6 +17,7 @@ versions/
 node_modules/
 build/
 *.log
+.env
 
 # IDE and editor files
 .vscode/
