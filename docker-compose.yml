@@ -55,6 +55,8 @@ services:
     volumes:
       - frontend-data:/app/build  # Общий том для собранных файлов
     command: ["npm", "run", "build"]  # Соберите приложение
+    depends_on:
+      - backend  # Убедитесь, что бэкенд запущен, если требуется
 
 volumes:
   postgres-data:
